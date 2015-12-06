@@ -22,6 +22,71 @@ Than in the module buildscript:
 ```groovy
 compile 'com.github.shareme:GWSForge:{latest-release-number}@aar'
 ```
+
+Extend BeeConfig class and add the functionalities as you needed.
+```java
+public class SampleBeeConfig extends BeeConfig {
+
+  /**
+  * Add extra information by using content object.
+  */
+  @Override public void onInfoContentCreated(Map<String, String> content) {
+    content.put("Current End Point", "http://www.google.com");
+  }
+
+  /**
+  * It is called when the close button is pressed
+  */
+  @Override public void onClose() {
+    super.onClose();
+  }
+
+  /**
+  * A sample button implementation
+  */
+  @Title("Reset")
+  @Button
+  public void onResetClicked() {
+    Log.d(TAG, "onResetClicked");
+  }
+
+  /**
+  * A sample checkbox implementation
+  */
+  @Title("Show splash screen")
+  @CheckBox
+  public void onShowSplashChecked(boolean isChecked) {
+    Log.d(TAG, "onShowSplashChecked");
+  }
+
+  /**
+  * A sample spinner implementation
+  */
+  @Title("End Point")
+  @Spinner({"Staging", "Live", "Mock"})
+  public void onEndPointSelected(String selectedValue) {
+    Log.d(TAG, "onEndPointSelected");
+  }
+}
+```
+
+In order to activate Bee, you need to pass activity as context. You can either initialize it in base activity and show in all activities or you can just initialize it in specific activities.
+
+```
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    ...
+
+  Bee.init(this)
+    .setBeeSize(100)                 //optional bee button size
+    .setBeePosition(Gravity.CENTER)  //optional bee button position
+    .setBeeMargin(0, 0, 0, 400)      //optional margin for the bee button
+    .inject(SampleBeeConfig.class);  //required
+}
+```
+
+
+
 Target Android API Range
 ========================
 

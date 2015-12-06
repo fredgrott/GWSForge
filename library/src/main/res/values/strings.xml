@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Library</string>
-</resources>
+    <string name="debug_save">Save</string>
+<string name="debug_close">Close</string>
+<string name="settings">Settings</string>
+<string name="info">Info</string>
+<string name="log">Log</string>
+<string name="clipboard">Clipboard</string>
+
+    </resources>
